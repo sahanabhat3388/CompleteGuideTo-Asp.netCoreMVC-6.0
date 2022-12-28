@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Asp.netCoreMVCIntro.Models.Tutorial>;
+
+@{
+    ViewData["Title"] = "Title - Tutorial";
+}
+
+<a class="text-dark btn btn-primary mt-3 asp-controller="Tutorial" asp-action="CreateTutorial">Add New Tutorial</a>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th> 
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var tutorial in Model)
+    {
+      <tr>
+        <td>@tutorial.Id</td>
+        <td>@tutorial.Name</td>
+        <td>@tutorial.Description</td>
+        <td><a class="text-dark btn btn-primary" asp-controller="Tutorial" asp-action="EditTutorial" asp-route-id="@tutorial.Id">Edit</a></td>
+        <td><a class="text-dark btn btn-danger" asp-controller="Tutorial" asp-action="DeleteTutorial" asp-route-id="@tutorial.Id">Delete</a></td>
+      </tr>
+    }    
+</table>
