@@ -1,6 +1,7 @@
 using Asp.netCoreMVCIntro.Context;
 using Asp.netCoreMVCIntro.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(Directory.GetCurrentDirectory(), "StaticFileTesting")),
+    RequestPath = "/StaticFileTesting"
+});
 
 app.UseRouting();
 
