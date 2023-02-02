@@ -9,5 +9,19 @@ namespace Asp.netCoreMVCIntro.Context
         {
         }
         public DbSet<Tutorial> Tutorials { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        // seed database tables with initial data 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Article>().HasData(
+                new Article
+                {
+                    ArticleId = 1,
+                    ArticleTitle = "Introduction to C#",
+                    ArticleContent = "C# is an Object oriented language",
+                    TutorialId = 1
+                }
+            );
+        }
     }
 }

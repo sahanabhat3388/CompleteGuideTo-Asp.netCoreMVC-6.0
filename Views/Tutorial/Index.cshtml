@@ -17,11 +17,11 @@
     @foreach (var tutorial in Model)
     {
       <tr>
-        <td>@tutorial.Id</td>
+            <td>@tutorial.Id</td>
         <td>@tutorial.Name</td>
         <td>@tutorial.Description</td>
-        <td><a class="text-dark btn btn-primary" asp-controller="Tutorial" asp-action="EditTutorial" asp-route-id="@tutorial.Id">Edit</a></td>
-        <td><a class="text-dark btn btn-danger" asp-controller="Tutorial" asp-action="DeleteTutorial" asp-route-id="@tutorial.Id">Delete</a></td>
+            <td><a class="text-dark btn btn-primary" asp-controller="Tutorial" asp-action="EditTutorial" asp-route-id="@tutorial.Id">Edit</a></td>
+            <td><a class="text-dark btn btn-danger" asp-controller="Tutorial" asp-action="DeleteTutorial" asp-route-id="@tutorial.Id">Delete</a></td>
       </tr>
     }    
 </table>

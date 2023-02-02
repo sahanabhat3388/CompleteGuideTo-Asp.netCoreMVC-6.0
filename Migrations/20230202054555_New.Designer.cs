@@ -3,6 +3,7 @@ using Asp.netCoreMVCIntro.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asp.netCoreMVCIntro.Migrations
 {
     [DbContext(typeof(TutorialDbContext))]
-    partial class TutorialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230202054555_New")]
+    partial class New
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,17 +82,12 @@ namespace Asp.netCoreMVCIntro.Migrations
             modelBuilder.Entity("Asp.netCoreMVCIntro.Models.Article", b =>
                 {
                     b.HasOne("Asp.netCoreMVCIntro.Models.Tutorial", "Tutorial")
-                        .WithMany("Articles")
+                        .WithMany()
                         .HasForeignKey("TutorialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Tutorial");
-                });
-
-            modelBuilder.Entity("Asp.netCoreMVCIntro.Models.Tutorial", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,5 +16,6 @@ namespace Asp.netCoreMVCIntro.Models
         [Display(Name = "Tutorial Description")]
         public string Description { get; set; }
 
+        public List<Article> Articles { get; set; }
     }
 }
