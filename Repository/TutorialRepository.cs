@@ -12,14 +12,13 @@ namespace Asp.netCoreMVCIntro.Repository
             _context = context;
         }
 
-        public Tutorial Add(Tutorial tutorial)
+        public void Add(Tutorial tutorial)
         {
-            _context.Tutorials.Add(tutorial);
-            _context.SaveChanges();
-            return tutorial;
+            _context.Tutorials.AddAsync(tutorial);
+            _context.SaveChangesAsync();
         }
 
-        public Tutorial Delete(int Id)
+        public void Delete(int Id)
         {
             Tutorial tutorial = _context.Tutorials.Find(Id);
             if (tutorial != null)
@@ -27,17 +26,16 @@ namespace Asp.netCoreMVCIntro.Repository
                 _context.Tutorials.Remove(tutorial);
                 _context.SaveChanges();
             }
-            return tutorial;
         }
 
-            public IEnumerable<Tutorial> GetAllTutorial()
+        public async Task<IEnumerable<Tutorial>> GetAllTutorial()
         {
-            return _context.Tutorials;
+            return await _context.Tutorials.ToListAsync();
         }
 
-        public Tutorial GetTutorial(int Id)
+        public async Task<Tutorial> GetTutorial(int Id)
         {
-            return _context.Tutorials.Find(Id);
+            return await _context.Tutorials.FindAsync(Id);
         }
 
         public Tutorial Update(Tutorial tutorialModified)

@@ -13,9 +13,9 @@ namespace Asp.netCoreMVCIntro.Controllers
             _tutorialRepository = tutorialRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var tutorials = _tutorialRepository.GetAllTutorial();
+            var tutorials = await _tutorialRepository.GetAllTutorial();
             return View(tutorials);
             
         }
@@ -28,34 +28,34 @@ namespace Asp.netCoreMVCIntro.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTutorial(Tutorial tutorial)
+        public async Task<IActionResult> CreateTutorial(Tutorial tutorial)
         {
             if (!ModelState.IsValid)
             {
                 return View(tutorial);
             }
-            Tutorial newtutorial = _tutorialRepository.Add(tutorial);
+             _tutorialRepository.Add(tutorial);
             return RedirectToAction("Index");
         }
 
 
         [HttpGet]
-        public IActionResult EditTutorial(int id, string querystringData)
+        public async Task<IActionResult> EditTutorial(int id, string querystringData)
         {
-            Tutorial tutorial = _tutorialRepository.GetTutorial(id);
+            Tutorial tutorial = await _tutorialRepository.GetTutorial(id);
             return View(tutorial);
         }
 
 
         [HttpPost]
-        public IActionResult EditTutorial(Tutorial modifiedData)
+        public async Task<IActionResult> EditTutorial(Tutorial modifiedData)
         {
 
             if (!ModelState.IsValid)
             {
                 return View(modifiedData);
             }
-            Tutorial tutorial = _tutorialRepository.GetTutorial(modifiedData.Id);
+            Tutorial tutorial = await _tutorialRepository.GetTutorial(modifiedData.Id);
             tutorial.Name = modifiedData.Name;
             tutorial.Description = modifiedData.Description;
             Tutorial updatedTutorial = _tutorialRepository.Update(tutorial);
@@ -63,9 +63,9 @@ namespace Asp.netCoreMVCIntro.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTutorial(int id)
+        public async Task<IActionResult> GetTutorial(int id)
         {
-            Tutorial tutorial = _tutorialRepository.GetTutorial(id);
+            Tutorial tutorial = await _tutorialRepository.GetTutorial(id);
             // return RedirectToAction("Index",tutorial);
             List<Tutorial> tutorials = new List<Tutorial>();
             tutorials.Add(tutorial);
@@ -74,7 +74,7 @@ namespace Asp.netCoreMVCIntro.Controllers
 
         public IActionResult DeleteTutorial(int id)
         {
-            Tutorial deletedTutorial = _tutorialRepository.Delete(id);
+            _tutorialRepository.Delete(id);
             return RedirectToAction("Index");
         }
     }

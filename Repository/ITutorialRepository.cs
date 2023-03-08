@@ -4,14 +4,14 @@ namespace Asp.netCoreMVCIntro.Repository
 {
     public interface ITutorialRepository
     {
-        Tutorial Add(Tutorial tutorial);
+        void Add(Tutorial tutorial);
 
         Tutorial Update(Tutorial tutorial);
 
-        Tutorial Delete(int Id);
+        void Delete(int Id);
 
-        Tutorial GetTutorial(int Id);
+        Task<Tutorial> GetTutorial(int Id);
 
-        IEnumerable<Tutorial> GetAllTutorial();
+        Task<IEnumerable<Tutorial>> GetAllTutorial();
     }
 }
