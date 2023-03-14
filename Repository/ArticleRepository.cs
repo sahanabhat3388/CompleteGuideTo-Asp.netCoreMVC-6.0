@@ -1,5 +1,6 @@
 ﻿using Asp.netCoreMVCIntro.Context;
 using Asp.netCoreMVCIntro.Models;
+using Asp.netCoreMVCIntro.ViewModels;
 
 namespace Asp.netCoreMVCIntro.Repository
 {
@@ -11,7 +12,7 @@ namespace Asp.netCoreMVCIntro.Repository
             _context = context;
         }
 
-        public Article AddArticle(Article article)
+        public void AddArticle(ArticleViewModel article)
         {
             throw new NotImplementedException();
         }

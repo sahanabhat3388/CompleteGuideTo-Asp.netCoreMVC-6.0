@@ -1,10 +1,11 @@
 ﻿using Asp.netCoreMVCIntro.Models;
+using Asp.netCoreMVCIntro.ViewModels;
 
 namespace Asp.netCoreMVCIntro.Repository
 {
     public interface IArticleRepository
     {
-        Article AddArticle(Article article);
+        void AddArticle(ArticleViewModel article);
 
         Article UpdateArticle(Article article);
 
