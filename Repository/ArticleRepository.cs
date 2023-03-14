@@ -1,6 +1,7 @@
 ﻿using Asp.netCoreMVCIntro.Context;
 using Asp.netCoreMVCIntro.Models;
 using Asp.netCoreMVCIntro.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asp.netCoreMVCIntro.Repository
 {
@@ -14,32 +15,49 @@ namespace Asp.netCoreMVCIntro.Repository
 
         public void AddArticle(ArticleViewModel article)
         {
-            throw new NotImplementedException();
+            var newArticle = new Article()
+            {
+                ArticleTitle = article.ArticleTitle,
+                ArticleContent = article.ArticleContent,
+                TutorialId = article.TutorialId
+            };
+            _context.Articles.AddAsync(newArticle);
+            _context.SaveChangesAsync();
         }
 
-        public Article DeleteArticle(int Id)
+        public async Task<Article> DeleteArticle(int Id)
         {
-            throw new NotImplementedException();
+            Article article = await _context.Articles.FindAsync(Id);
+            if (article != null)
+            {
+                _context.Articles.Remove(article);
+            }
+            return article;
         }
 
-        public IEnumerable<Article> GetAllArticle()
+        public async Task<IEnumerable<Article>> GetAllArticle()
         {
-            return _context.Articles;
+            return await _context.Articles.ToListAsync();
         }
 
-        public Article GetArticle(int Id)
+        public async Task<IEnumerable<Tutorial>> GetAllTutorials()
         {
-            throw new NotImplementedException();
+            return await _context.Tutorials.ToListAsync();
         }
 
-        public IEnumerable<Article> GetArticlesByTutorialId(int tutorialId)
+        public async Task<Article> GetArticleById(int Id)
         {
-            return _context.Articles.Where(a => a.TutorialId == tutorialId).ToList();
+            return await _context.Articles.FindAsync(Id);
         }
 
-        public Article UpdateArticle(Article article)
+        public async Task<IEnumerable<Article>> GetArticlesByTutorialId(int tutorialId)
         {
-            throw new NotImplementedException();
+            return await _context.Articles.Where(a => a.TutorialId == tutorialId).ToListAsync();
+        }
+
+        public void UpdateArticle(Article articleModified)
+        {
+            _context.Articles.Update(articleModified);
         }
     }
 }

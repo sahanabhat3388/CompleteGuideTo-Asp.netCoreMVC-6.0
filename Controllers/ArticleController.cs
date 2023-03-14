@@ -16,9 +16,9 @@ namespace Asp.netCoreMVCIntro.Controllers
             return View();
         }
 
-        public IActionResult DisplayArticles(int id)
+        public async Task<IActionResult> DisplayArticles(int id)
         {
-            IEnumerable<Article> articles = _articleRepository.GetArticlesByTutorialId(id);
+            IEnumerable<Article> articles =await _articleRepository.GetArticlesByTutorialId(id);
             return View(articles);
         }
     }

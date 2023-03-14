@@ -7,14 +7,16 @@ namespace Asp.netCoreMVCIntro.Repository
     {
         void AddArticle(ArticleViewModel article);
 
-        Article UpdateArticle(Article article);
+        void UpdateArticle(Article article);
 
-        Article DeleteArticle(int Id);
+        Task<Article> DeleteArticle(int Id);
 
-        Article GetArticle(int Id);
+        Task<Article> GetArticleById(int Id);
 
-        IEnumerable<Article> GetAllArticle();
+        Task<IEnumerable<Article>> GetAllArticle();
 
-        IEnumerable<Article> GetArticlesByTutorialId(int tutorialId);
+        Task<IEnumerable<Tutorial>> GetAllTutorials();
+
+        Task<IEnumerable<Article>> GetArticlesByTutorialId(int tutorialId);
     }
 }
