@@ -1,5 +1,6 @@
 ﻿using Asp.netCoreMVCIntro.Context;
 using Asp.netCoreMVCIntro.Models;
+using Asp.netCoreMVCIntro.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Asp.netCoreMVCIntro.Repository
@@ -12,10 +13,16 @@ namespace Asp.netCoreMVCIntro.Repository
             _context = context;
         }
 
-        public void Add(Tutorial tutorial)
+        public void Add(TutorialViewModel tutorial)
         {
-            _context.Tutorials.AddAsync(tutorial);
-            _context.SaveChangesAsync();
+            var newTutorial = new Tutorial()
+            {
+                Description= tutorial.Description,
+                Name= tutorial.Name,
+            };
+
+            _context.Tutorials.Add(newTutorial);
+            _context.SaveChanges();
         }
 
         public void Delete(int Id)

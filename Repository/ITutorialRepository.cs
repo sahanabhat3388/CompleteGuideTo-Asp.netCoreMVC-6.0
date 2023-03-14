@@ -1,10 +1,11 @@
 ﻿using Asp.netCoreMVCIntro.Models;
+using Asp.netCoreMVCIntro.ViewModels;
 
 namespace Asp.netCoreMVCIntro.Repository
 {
     public interface ITutorialRepository
     {
-        void Add(Tutorial tutorial);
+        void Add(TutorialViewModel tutorial);
 
         Tutorial Update(Tutorial tutorial);
 

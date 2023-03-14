@@ -1,10 +1,20 @@
-﻿@model Asp.netCoreMVCIntro.Models.Tutorial
+﻿@model Asp.netCoreMVCIntro.ViewModels.TutorialViewModel
 @{
     ViewBag.Title = "Edit Tutorial";
 }
-<form asp-controller="Tutorial" asp-action="EditTutorial" method="post" class="mt-3">
-    <input hidden asp-for="Id" />
-    @*Partial tag helper*@
-    <partial name="_TutorialFormFields" model="Model" />
- 
-</form>
+
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p><h1>Update tutorial details </h1></p>
+        <form asp-controller="Tutorial" asp-action="EditTutorial" method="post" class="mt-3">
+            <input hidden asp-for="Id" />
+            @*Partial tag helper*@
+            <partial name="_TutorialFormFields" model="Model" />
+
+        </form>
+    </div>
+</div>
+
+
+

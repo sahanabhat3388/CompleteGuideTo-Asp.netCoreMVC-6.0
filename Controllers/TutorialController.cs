@@ -28,7 +28,7 @@ namespace Asp.netCoreMVCIntro.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTutorial(Tutorial tutorial)
+        public IActionResult CreateTutorial(TutorialViewModel tutorial)
         {
             if (!ModelState.IsValid)
             {
@@ -43,12 +43,17 @@ namespace Asp.netCoreMVCIntro.Controllers
         public async Task<IActionResult> EditTutorial(int id, string querystringData)
         {
             Tutorial tutorial = await _tutorialRepository.GetTutorial(id);
-            return View(tutorial);
+            var data = new TutorialViewModel()
+            {
+                Name = tutorial.Name,
+                Description = tutorial.Description
+            };
+            return View(data);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> EditTutorial(Tutorial modifiedData)
+        public async Task<IActionResult> EditTutorial(TutorialViewModel modifiedData)
         {
 
             if (!ModelState.IsValid)
