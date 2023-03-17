@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<Article>
+@{
+    ViewBag.Title = "Articles";
+}
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p><h1>Articles</h1></p>
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+            </tr>
+            @foreach (var article in Model)
+            {
+                <tr>
+                    <td>@article.ArticleTitle</td>
+                    <td>@article.ArticleContent</td>
+                   
+                </tr>
+            }
+        </table>
+    </div>
+</div>
