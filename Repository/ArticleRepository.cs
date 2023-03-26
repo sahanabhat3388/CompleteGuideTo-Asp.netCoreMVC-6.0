@@ -25,14 +25,14 @@ namespace Asp.netCoreMVCIntro.Repository
             _context.SaveChangesAsync();
         }
 
-        public async Task<Article> DeleteArticle(int Id)
+        public void DeleteArticle(int Id)
         {
-            Article article = await _context.Articles.FindAsync(Id);
+            Article article =  _context.Articles.Find(Id);
             if (article != null)
             {
                 _context.Articles.Remove(article);
+                _context.SaveChanges();
             }
-            return article;
         }
 
         public async Task<IEnumerable<Article>> GetAllArticle()
@@ -55,9 +55,11 @@ namespace Asp.netCoreMVCIntro.Repository
             return await _context.Articles.Where(a => a.TutorialId == tutorialId).ToListAsync();
         }
 
-        public void UpdateArticle(Article articleModified)
+        public Article UpdateArticle(Article updatedArticle)
         {
-            _context.Articles.Update(articleModified);
+            _context.Update(updatedArticle);
+            _context.SaveChanges();
+            return updatedArticle;
         }
     }
 }

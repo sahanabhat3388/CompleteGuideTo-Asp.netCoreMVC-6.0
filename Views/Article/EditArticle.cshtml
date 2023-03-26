@@ -1,0 +1,39 @@
+﻿@model Asp.netCoreMVCIntro.ViewModels.ArticleViewModel
+
+@{
+    ViewBag.Title = "Update Article";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p><h1>Update Article</h1></p>
+        <form method="post" asp-controller="Article" asp-action="EditArticle">
+            <div class="row text">
+                <div class="col-md-8 offset-2">
+                    <input hidden asp-for="Id" />
+                    <div class="form-group mb-3">
+                        <label asp-for="ArticleTitle" class="control-label"></label>
+                        <input asp-for="ArticleTitle" class="form-control">
+                        <span asp-validation-for="ArticleTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ArticleContent" class="control-label"></label>
+                        <textarea asp-for="ArticleContent" class="form-control"></textarea>
+                        <span asp-validation-for="ArticleContent" class="text-danger"></span>
+                    </div>
+
+                   @* <div class="form-group mb-3">
+                        <label class="control-label">Please select tutorial</label>
+                        <select asp-for="TutorialId" asp-items="ViewBag.Tutorials" sele></select>
+                    </div>*@
+
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-outline-success float-end">Submit</button>
+                        <a asp-controller="Tutorial" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

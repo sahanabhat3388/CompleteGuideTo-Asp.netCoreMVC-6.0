@@ -20,6 +20,19 @@ namespace Asp.netCoreMVCIntro.Controllers
             return View(articles);
         }
 
+        public async Task<IActionResult> DisplayArticlesByTutorialId(int id)
+        {
+            IEnumerable<Article> articles = await _articleRepository.GetArticlesByTutorialId(id);
+            return View(articles);
+        }
+
+        public async Task<IActionResult> GetArticleByArticleId(int id)
+        {
+            Article article =await _articleRepository.GetArticleById(id);
+            return View(article);
+
+        }
+
         [HttpGet]
         public async Task<IActionResult> AddNewArticle()
         {
@@ -43,10 +56,42 @@ namespace Asp.netCoreMVCIntro.Controllers
 
         }
 
-        public async Task<IActionResult> DisplayArticles(int id)
+        [HttpGet]
+        public async Task<IActionResult> EditArticle(int id)
         {
-            IEnumerable<Article> articles =await _articleRepository.GetArticlesByTutorialId(id);
-            return View(articles);
+            Article article = await _articleRepository.GetArticleById(id);
+            var data = new ArticleViewModel()
+            {
+                ArticleTitle = article.ArticleTitle,
+                ArticleContent = article.ArticleContent
+            };
+            var tutorials = await _articleRepository.GetAllTutorials();
+            ViewBag.Tutorials = new SelectList(tutorials, "Id", "Name");
+            return View(data);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditArticle(ArticleViewModel modifiedData)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(modifiedData);
+            }
+            Article article = await _articleRepository.GetArticleById(modifiedData.Id);
+            article.ArticleTitle = modifiedData.ArticleTitle;
+            article.ArticleContent = modifiedData.ArticleContent;
+            _articleRepository.UpdateArticle(article);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteArticle(int id)
+        {
+            _articleRepository.DeleteArticle(id);
+            return RedirectToAction("Index");
+        }
+
+       
     }
 }

@@ -6,6 +6,7 @@ namespace Asp.netCoreMVCIntro.ViewModels
 {
     public class ArticleViewModel
     {
+        public int Id { get; set; }
         public ArticleViewModel()
         {
             tutorials = new List<Tutorial>();

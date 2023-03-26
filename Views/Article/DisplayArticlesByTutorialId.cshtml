@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Article>
+@{
+    ViewData["Title"] = "Articles";
+    // Layout = "~/Views/Shared/_TutorialLayout.cshtml";
+}
+<h1>Choose the article to read</h1>
+<hr />
+<div class="row">
+    <div class="col-md-2" style="background-color:aliceblue">
+        <table class="table mt-3">
+
+            @foreach (var article in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Article" asp-action="GetArticleByArticleId" asp-route-id="@article.ArticleId">@article.ArticleTitle</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
